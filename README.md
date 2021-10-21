@@ -1,1 +1,2 @@
-# monodepthseg
+# MonoDepthSeg
+Monocular Depth Estimation
