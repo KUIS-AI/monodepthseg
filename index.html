@@ -1,0 +1,203 @@
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript">google.load("jquery", "1.3.2");</script>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
+      rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="./resources/style.css" media="screen"/>
+
+<html lang="en">
+<head>
+	<title>Self-Supervised Monocular Scene Decomposition and Depth Estimation</title>
+    <!-- Facebook automatically scrapes this. Go to https://developers.facebook.com/tools/debug/
+        if you update and want to force Facebook to re-scrape. -->
+	<meta property="og:image" content="Path to my teaser.jpg"/>
+	<meta property="og:title" content="Self-Supervised Monocular Scene Decomposition and Depth Estimation" />
+	<meta property="og:description" content="Monocular Depth Estimation" />
+    <!-- Twitter automatically scrapes this. Go to https://cards-dev.twitter.com/validator?
+        if you update and want to force Twitter to re-scrape. -->
+    <meta property="twitter:card"          content="summary_large_image" />
+    <meta property="twitter:title"         content="Self-Supervised Monocular Scene Decomposition and Depth Estimation" />
+    <meta property="twitter:description"   content="Monocular Depth Estimation" />
+    <meta property="twitter:image"         content="Path to my teaser.jpg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Add your Google Analytics tag here -->
+    <script async
+            src="https://www.googletagmanager.com/gtag/js?id=UA-97476543-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'UA-97476543-1');
+    </script>
+
+</head>
+
+<body>
+<div class="container">
+    <div class="title">
+        Self-Supervised Monocular Scene Decomposition and Depth Estimation
+    </div>
+
+    <div class="venue">
+        In 3DV 2021
+    </div>
+
+    <br><br>
+
+    <div class="author">
+        <a>Sadra Safadoust</a>
+    </div>
+    <div class="author">
+        <a>Fatma Güney</a>
+    </div>
+    <br><br>
+    <div class="affiliation"><a href="https://ai.ku.edu.tr" target="_blank"> KUIS AI Center, Koç University</a></div>
+
+    <br><br>
+
+    <div class="links"><a>[Paper]</a></div>
+    <div class="links"><a>[Code]</a></div>
+
+    <br><br>
+
+    <hr>
+    <img style="width: 90%;" src="./resources/overview.png"
+     alt="Method overview figure"/>
+     <!--<p style="width: 90%;">
+       <b>Left:</b> The depth network outputs depth estimate <b>D̂</b><sub><i>t</i></sub> for input <b>I</b><sub><i>t</i></sub> . <b>Right:</b> Given <b>D̂</b><sub><i>t</i></sub> and two consecutive frames <b>I</b><sub><i>s</i></sub> and <b>I</b><sub><i>t</i></sub> , the shared encoder maps the input frames and the depth estimate to a common representation shared by the following two decoders. The mask decoder produces the same resolution <i>K</i> masks {<b>M</b><sub><i>1</i></sub>, &hellip;, <b>M</b><sub><i>K</i></sub> } with skip connections between the corresponding layers of the encoder. The pose decoder takes the same encoded representation and converts it into rigid transformations {<b>T</b><sub><i>1</i></sub>, &hellip; , <b>T</b><sub><i>K</i></sub> } corresponding to the masks. Given the set of rigid transformations and corresponding masks, we transform a 3D point as a convex combination of estimated transformations weighted according to estimated masks. The number of components, <i>K</i>, is a hyper-parameter of our model.
+     </p>
+     -->
+     <p style="width:90%;">
+       Self-supervised monocular depth estimation approaches
+       either ignore independently moving objects in the scene or
+       need a separate segmentation step to identify them. We propose
+       <b>MonoDepthSeg</b> to jointly estimate depth and segment
+       moving objects from monocular video without using any
+       ground-truth labels. We decompose the scene into a fixed
+       number of components where each component corresponds
+       to a region on the image with its own transformation matrix
+       representing its motion. We estimate both the mask and the
+       motion of each component efficiently with a shared encoder.
+       We evaluate our method on three driving datasets and show
+       that our model clearly improves depth estimation while decomposing
+       the scene into separately moving components.
+     </p>
+     <hr>
+     <table style="width: 50%;" align=center>
+       <tr>
+         <td> <div class="tooltip"><img style="width: 100%;" src='./resources/zoomed/img.png' alt="Input Image"/><span class="tooltiptextleft">Input <br> Image </span></div> </td>
+         <td> <div class="tooltip"><img style="width: 100%;" src='./resources/zoomed/masks.png' alt="Our Scene Decomposition"/> <span class="tooltiptextright">Our Scene Decomposition </span></div></td>
+       </tr>
+       <tr>
+         <td> <div class="tooltip"><img style="width: 100%;" src='./resources/zoomed/monodepth2_disp.png' alt="Monodepth2's Depth Estimation"/><span class="tooltiptextleft">Monodepth2's Depth Estimation </span></div> </td>
+         <td> <div class="tooltip"><img style="width: 100%;" src='./resources/zoomed/our_disp.png' alt="Our Depth Estimation"/><span class="tooltiptextright">Our Depth Estimation </span></div> </td>
+       </tr>
+     </table>
+     <p style="width: 80%;">
+      Monocular depth estimation methods assume a static scene by relying
+       on the ego-motion to explain the scene and fail in foreground
+      regions with independently moving objects (<b>bottom-left</b>: <a href="https://openaccess.thecvf.com/content_ICCV_2019/html/Godard_Digging_Into_Self-Supervised_Monocular_Depth_Estimation_ICCV_2019_paper.html"> Monodepth2</a>).
+      By decomposing the scene into a set of components, we estimate a
+      separate rigid transformation for each component, representing its
+      motion. This improves the results in regions with moving objects
+      (<b>bottom-right</b>) while simultaneously recovering a decomposition
+      of the scene, mostly corresponding to moving regions (<b>top-right</b>).
+     </p>
+     <hr>
+     <div style="width: 100%" align="center">
+     <div class="inner-container">
+       <div class="video-overlay">
+          <div class="empty-tl tooltip-video">
+            <span class="tooltiptextleft">Input <br> Image </span>
+          </div>
+          <div class="empty-tr tooltip-video">
+            <span class="tooltiptextright">Our Scene Decomposition </span>
+          </div>
+          <div class="empty-bl tooltip-video">
+            <span class="tooltiptextleft">Monodepth2's Depth Estimation </span>
+          </div>
+          <div class="empty-br tooltip-video">
+            <span class="tooltiptextright">Our Depth Estimation </span>
+          </div>
+        </div>
+       <video  autoplay loop muted loop>
+         <source src="./resources/video_1024.mp4" type="video/mp4">
+             Your browser does not support the video tag.
+      </video>
+    </div>
+    </div>
+    <!-- <video  autoplay loop muted style="height: 100px">
+      <source src="./resources/video.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+   </video> -->
+    <hr>
+
+     <!--
+     <table style="width: 90%;" align=center>
+       <tr>
+         <td> <div class="tooltip"><img style="width: 100%;" heigth=100  src='./resources/qualitative/qual1_img.png' alt="Input Image"/><span class="tooltiptexttop">Input <br> Image </span></div> </td>
+         <td> <div class="tooltip"><img style="width: 100%;" src='./resources/qualitative/qual1_monodepth2.png' alt="Monodepth2's Depth Estimation"/> <span class="tooltiptexttop">Monodepth2's Depth Estimation </span></div></td>
+         <td> <div class="tooltip"><img style="width: 100%;" src='./resources/qualitative/qual1_our.png' alt="Our Depth Estimation"/><span class="tooltiptexttop">Our Depth Estimation </span></div> </td>
+         <td> <div class="tooltip"><img style="width: 100%;" src='./resources/qualitative/qual1_mask.png' alt="Our Scene Decomposition"/><span class="tooltiptexttop">Our Scene Decomposition </span></div> </td>
+       </tr>
+       <tr>
+         <td> <div class="tooltip"><img style="width: 100%;" src='./resources/qualitative/qual2_img.png' alt="Input Image"/><span class="tooltiptexttop">Input <br> Image </span></div> </td>
+         <td> <div class="tooltip"><img style="width: 100%;" src='./resources/qualitative/qual2_monodepth2.png' alt="Monodepth2's Depth Estimation"/> <span class="tooltiptexttop">Monodepth2's Depth Estimation </span></div></td>
+         <td> <div class="tooltip"><img style="width: 100%;" src='./resources/qualitative/qual2_our.png' alt="Our Depth Estimation"/><span class="tooltiptexttop"> Our Depth Estimation</span></div> </td>
+         <td> <div class="tooltip"><img style="width: 100%;" src='./resources/qualitative/qual2_mask.png' alt="Our Scene Decomposition"/><span class="tooltiptexttop">Our Scene Decomposition </span></div> </td>
+       </tr>
+       <tr>
+         <td> <div class="tooltip"><img style="width: 100%;" src='./resources/qualitative/qual3_img.png' alt="Input Image"/><span class="tooltiptexttop">Input <br> Image </span></div> </td>
+         <td> <div class="tooltip"><img style="width: 100%;" src='./resources/qualitative/qual3_monodepth2.png' alt="Monodepth2's Depth Estimation"/> <span class="tooltiptexttop">Monodepth2's Depth Estimation</span></div></td>
+         <td> <div class="tooltip"><img style="width: 100%;" src='./resources/qualitative/qual3_our.png' alt="Our Depth Estimation"/><span class="tooltiptexttop">Our Depth Estimation</span></div> </td>
+         <td> <div class="tooltip"><img style="width: 100%;" src='./resources/qualitative/qual3_mask.png' alt="Our Scene Decomposition"/><span class="tooltiptexttop">Our Scene Decomposition</span></div> </td>
+       </tr>
+       <tr>
+         <td> <div class="tooltip"><img style="width: 100%;" src='./resources/qualitative/qual4_img.png' alt="Input Image"/><span class="tooltiptexttop">Input <br> Image </span></div> </td>
+         <td> <div class="tooltip"><img style="width: 100%;" src='./resources/qualitative/qual4_monodepth2.png' alt="Monodepth2's Depth Estimation"/> <span class="tooltiptexttop">Monodepth2's Depth Estimation</span></div></td>
+         <td> <div class="tooltip"><img style="width: 100%;" src='./resources/qualitative/qual4_our.png' alt="Our Depth Estimation"/><span class="tooltiptexttop">Our Depth Estimation </span></div> </td>
+         <td> <div class="tooltip"><img style="width: 100%;" src='./resources/qualitative/qual4_mask.png' alt="Our Scene Decomposition"/><span class="tooltiptexttop">Our Scene Decomposition </span></div> </td>
+       </tr>
+       <tr>
+         <td> <div class="tooltip"><img style="width: 100%;" src='./resources/qualitative/qual5_img.png' alt="Input Image"/><span class="tooltiptexttop">Input <br> Image </span></div> </td>
+         <td> <div class="tooltip"><img style="width: 100%;" src='./resources/qualitative/qual5_monodepth2.png' alt="Monodepth2's Depth Estimation"/> <span class="tooltiptexttop">Monodepth2's Depth Estimation</span></div></td>
+         <td> <div class="tooltip"><img style="width: 100%;" src='./resources/qualitative/qual5_our.png' alt="Our Depth Estimation"/><span class="tooltiptexttop">Our Depth Estimation</span></div> </td>
+         <td> <div class="tooltip"><img style="width: 100%;" src='./resources/qualitative/qual5_mask.png' alt="Our Scene Decomposition"/><span class="tooltiptexttop">Our Scene Decomposition</span></div> </td>
+       </tr>
+       <tr>
+         <td> <div class="tooltip"><img style="width: 100%;" src='./resources/qualitative/qual6_img.png' alt="Input Image"/><span class="tooltiptexttop">Input <br> Image </span></div> </td>
+         <td> <div class="tooltip"><img style="width: 100%;" src='./resources/qualitative/qual6_monodepth2.png' alt="Monodepth2's Depth Estimation"/> <span class="tooltiptexttop">Monodepth2's Depth Estimation</span></div></td>
+         <td> <div class="tooltip"><img style="width: 100%;" src='./resources/qualitative/qual6_our.png' alt="Our Depth Estimation"/><span class="tooltiptexttop">Our Depth Estimation </span></div> </td>
+         <td> <div class="tooltip"><img style="width: 100%;" src='./resources/qualitative/qual6_mask.png' alt="Our Scene Decomposition"/><span class="tooltiptexttop">Our Scene Decomposition </span></div> </td>
+       </tr>
+     </table> -->
+     <h1>Paper</h1>
+     <div class="paper-thumbnail">
+        <!-- <a href="https://arxiv.org"> -->
+            <img class="layered-paper-big" width="100%" src="./resources/paper.jpg" alt="Paper Thumbnail"/>
+        <!-- </a> -->
+    </div>
+    <br>
+    <div class="paper-info"style="width: 70%;">
+        <h3 >Self-Supervised Monocular Scene Decomposition and Depth Estimation</h3>
+        <p style="text-align: left;">Sadra Safadoust and Fatma Güney</p>
+        <p style="text-align: left;">In 3DV, 2021.</p>
+        <!-- <pre><code>
+          </code></pre> -->
+    </div>
+    <hr>
+    <h1>Acknowledgements</h1>
+      <p style="width: 60%">
+          Sadra Safadoust was supported by KUIS AI Center Fellowship and Fatma Güney by Marie Skłodowska-Curie
+          Individual Fellowship and TUBITAK 2232 International Fellowship for Outstanding Researchers Programme.
+      </p>
+</div>
+
+
+
+
+</body>
+
+</html>
